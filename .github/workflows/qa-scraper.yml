@@ -1,0 +1,27 @@
+name: Automated QA Scraper
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo by 23f1000780@ds.study.iitm.ac.in
+        uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright browsers
+        run: npx playwright install
+
+      - name: Run scraper
+        run: npm run scrape
